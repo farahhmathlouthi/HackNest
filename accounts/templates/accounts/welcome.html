@@ -1,0 +1,62 @@
+{%load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type = "text/css" href="https://bootswatch.com/5/quartz/bootstrap.min.css">
+    <title>Welcome to HackNest</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: left;
+            flex-direction: column;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-image: url('https://img.freepik.com/free-photo/hacker-headphones-breaching-data_482257-77665.jpg?t=st=1731604420~exp=1731608020~hmac=d0d85c49c7a8bf6c1ccecd94eba0dc68e2c262e893626dfd6f9acdec3dedb0ac&w=996');  /* Set your background image here */
+            background-size: cover; /* Make sure the image covers the full body */
+            background-position: center center;  /* Center the background image */
+            background-repeat: no-repeat;
+        
+        }
+        .container {
+            text-align: left;
+        }
+        .logo {
+            width: 150px;
+            margin-bottom: 20px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: left;
+            gap: 20px;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            color: white;
+            border-radius: 5px;
+        }
+        .sign-in {
+            background-color: #e83283;
+        }
+        .sign-up {
+            background-color: #3a8fd9;
+        }
+        .button:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to HackNest!</h1>
+        <div class="buttons">
+            <a href="{% url 'login_user' %}" class="button sign-in">Sign In</a>
+            <a href="{% url 'signup' %}" class="button sign-up">Sign Up</a>
+        </div>
+    </div>
+</body>
+</html>

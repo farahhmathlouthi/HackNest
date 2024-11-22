@@ -1,28 +1,39 @@
-{%load crispy_forms_tags %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type = "text/css" href="https://bootswatch.com/5/quartz/bootstrap.min.css">
-    <title>Home Page</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            font-family: Arial, sans-serif;
-            background-image: url("https://media.licdn.com/dms/image/D5612AQE-MyT6EjJ3VA/article-cover_image-shrink_720_1280/0/1707483130571?e=2147483647&v=beta&t=tN4SnB97m0kb5cSpj2n9QDIMqJqYroKVfl21iNSFucQ");
-            background-size: cover; /* Make sure the image covers the full body */
-            background-position: center center;  /* Center the background image */
-            background-repeat: no-repeat;
-        }
-    </style>
-</head>
-<body>
-    <h1>Welcome to the Home Page</h1>
-    <p>You're logged in successfully!</p>
-    <a href="{% url 'logout' %}">Log out</a>
-</body>
-</html>
+{% extends 'accounts/base.html' %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Welcome, {{ request.user.username }}!</h1>
+    <p>Hello, {{ request.user.username }}! We're glad to have you here.</p>
+    <div class="row">
+        {% if hackathons %}
+               {% for hackathon in hackathons %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <!-- Cover Photo -->
+            {% if hackathon.cover_photo %}
+                <img src="{{ hackathon.cover_photo.url }}" class="card-img-top" alt="Hackathon Cover Photo" style="height: 200px; object-fit: cover;">
+            {% else %}
+                <div class="card-img-top bg-secondary" style="height: 200px;">
+                    <p class="text-center text-white pt-5">No Poster Available</p>
+                </div>
+            {% endif %}
+
+            <!-- Minimal Details -->
+            <div class="card-body">
+                <h5 class="card-title">{{ hackathon.title }}</h5>
+                <p class="card-text"><strong>Location:</strong> {{ hackathon.location }}</p>
+                <p class="card-text"><strong>Start Date:</strong> {{ hackathon.start_date|date:"F d, Y" }}</p>
+                <a href="{% url 'hackathon_details' hackathon.id %}" class="btn btn-primary btn-sm">See Details</a>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+        {% else %}
+            <p>No hackathons available right now. Check back later!</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

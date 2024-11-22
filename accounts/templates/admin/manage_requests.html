@@ -1,0 +1,23 @@
+<h1>Pending Organizer Requests</h1>
+<table>
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Entity</th>
+            <th>Requested On</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for req in pending_requests %}
+        <tr>
+            <td>{{ req.user.username }}</td>
+            <td>{{ req.entity }}</td>
+            <td>{{ req.requested_on }}</td>
+            <td>
+                <a href="{% url 'approve_organizer_request' req.id %}">Approve</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
